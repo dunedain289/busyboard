@@ -2,6 +2,7 @@
 Description=Arcade Button Control
 
 [Service]
+WorkingDirectory=/home/pi/busyboard
 ExecStart=/home/pi/busyboard/button-control.py
 
 [Install]
