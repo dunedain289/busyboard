@@ -1,0 +1,9 @@
+[Unit]
+Description=Arcade Button Control
+
+[Service]
+ExecStart=/home/pi/busyboard/button-control.py
+
+[Install]
+WantedBy=default.target
+
