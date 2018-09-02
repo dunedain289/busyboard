@@ -65,7 +65,7 @@ class Button(object):
         pass
 
     def update(self):
-        b = self.update_button_state()
+        b = self.update_button_state() 
         self.light_output()
 
         if b:
@@ -105,15 +105,15 @@ try:
     blue.light_on()
     time.sleep(0.33)
     blue.light_off()
-    yellow.light_on()
-    time.sleep(0.33)
-    yellow.light_off()
     red.light_on()
     time.sleep(0.33)
     red.light_off()
     green.light_on()
     time.sleep(0.33)
     green.light_off()
+    yellow.light_on()
+    time.sleep(0.33)
+    yellow.light_off()
 
     while True:
         if blue.update():
