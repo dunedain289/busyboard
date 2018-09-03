@@ -13,6 +13,7 @@ def init():
     # set to maximum brightness
     pixels.val = 1.0
 
+    db.gfx_frame_rate = 100
 
 # runs periodically, frame rate is configurable
 def loop():

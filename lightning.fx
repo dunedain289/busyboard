@@ -6,6 +6,8 @@ def init():
     pixels.val = 0.0
     pixels.hs_fade = 4000
 
+    db.gfx_frame_rate = 100
+
 
 def loop():
     # if rand() < 2000:
