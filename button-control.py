@@ -4,6 +4,12 @@ import RPi.GPIO as GPIO
 import time
 from chromatron import *
 
+from __future__ import print_function
+import sys
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
 # use P1 header pin numbering convention
 GPIO.setmode(GPIO.BOARD)
 
@@ -94,7 +100,7 @@ group.load_vm('chaser.fx', False)
 group.load_vm('emergency.fx', False)
 group.load_vm('lightning.fx', False)
 
-print("starting loop")
+eprint("starting loop")
 
 def switch_script(name):
     group.stop_vm()
@@ -119,25 +125,25 @@ try:
         if blue.update():
             # emergency.fxb
             switch_script("emergency.fxb")
-            print("Blue pushed")
+            eprint("Blue pushed")
         if red.update():
             # chaser.fxb
             switch_script("chaser.fxb")
-            print("Red pushed")
+            eprint("Red pushed")
         if yellow.update():
             # rainbow.fxb
             switch_script("rainbow.fxb")
-            print("Yellow pushed")
+            eprint("Yellow pushed")
         if green.update():
             # lightning.fxb
             switch_script("lightning.fxb")
-            print("Green pushed")
+            eprint("Green pushed")
 
         time.sleep(0.05)
 except KeyboardInterrupt:
-    print("exiting")
+    eprint("exiting")
 
-print("done")
+eprint("done")
 
 GPIO.cleanup()
 
