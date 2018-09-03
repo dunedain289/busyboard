@@ -11,6 +11,8 @@ from chromatron import *
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
+GPIO.setwarnings(False)
+
 # use P1 header pin numbering convention
 GPIO.setmode(GPIO.BOARD)
 
@@ -18,9 +20,18 @@ class Button(object):
     """Button w/ a switch + LED"""
 
     def __init__(self, switch_pin, led_pin):
+        # light state tracking
         self.light_state = False
         self.blinking = False
+
+        # button debouncing
+        self.prev_button_sample = False
+        self.button_sample = False
+
+        # button state tracking
         self.button_state = False
+
+        # hw resources
         self.switch_pin = switch_pin
         self.led_pin = led_pin
         GPIO.setup(self.switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -48,7 +59,13 @@ class Button(object):
 
     def update_button_state(self):
         """True is pushed"""
-        pushed_now = not GPIO.input(self.switch_pin)
+        self.prev_button_sample = self.button_sample
+        self.button_sample = not GPIO.input(self.switch_pin)
+
+        pushed_now = False
+        if self.prev_button_sample == self.button_sample:
+            pushed_now = self.button_sample
+
         if self.button_state and pushed_now:
             self.button_was_held_down()
         elif not self.button_state and pushed_now:
