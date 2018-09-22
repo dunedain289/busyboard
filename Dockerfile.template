@@ -11,4 +11,4 @@ RUN pip install -r /requirements.txt
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-CMD ["python", "button_control.py"]
+CMD ["python", "button-control.py"]
