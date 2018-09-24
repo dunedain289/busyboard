@@ -1,4 +1,5 @@
 # limits.fx
+# 183 total lights
 
 
 def init():
