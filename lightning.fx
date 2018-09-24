@@ -1,19 +1,17 @@
 hue = Number()
-cursor = Number()
-tmp = Number()
 
 def init():
+    hue = 0.333
+    cursor = 0
+
     pixels.sat = 1.0
+    pixels.hs_fade = 40
     pixels.val = 0.0
-    pixels.hs_fade = 4000
 
     db.gfx_frame_rate = 100
 
 
 def loop():
-    # if rand() < 2000:
-    #     return
-
     pixels.v_fade = 3000
     pixels.val = 0.0
 
@@ -24,16 +22,13 @@ def loop():
     pixels[pixel].v_fade = 100
     pixels[pixel].val = 1.0
 
-    cursor += 1
-
-    if cursor >= pixels.count:
-        tmp = rand(3)
-        if tmp == 0:
-            hue = 0.333 # green
-        elif tmp == 1:
-            hue = 0.833 # purple
-        elif tmp == 2:
-            hue = 0.083 # orange
-        hue += rand(100)
-        cursor = 0
+    tmp = Number()
+    tmp = rand(3)
+    if tmp == 0:
+        hue = 0.833 + rand(0, 0.02)
+    elif tmp == 1:
+        hue = 0.333 + rand(0, 0.02)
+    elif tmp == 2:
+        hue = 0.070 + rand(0, 0.02)
+    
 
