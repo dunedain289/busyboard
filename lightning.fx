@@ -1,5 +1,6 @@
 hue = Number()
 cursor = Number()
+tmp = Number()
 
 def init():
     pixels.sat = 1.0
@@ -23,10 +24,16 @@ def loop():
     pixels[pixel].v_fade = 100
     pixels[pixel].val = 1.0
 
-
     cursor += 1
 
     if cursor >= pixels.count:
-        hue = rand()
+        tmp = rand(3)
+        if tmp == 0:
+            hue = 0.333 # green
+        elif tmp == 1:
+            hue = 0.833 # purple
+        elif tmp == 2:
+            hue = 0.083 # orange
+        hue += rand(100)
         cursor = 0
 

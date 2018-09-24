@@ -147,6 +147,8 @@ try:
     time.sleep(0.33)
     yellow.light_off()
 
+    switch_script("lightning.fxb")
+
     while True:
         if blue.update():
             # emergency.fxb
