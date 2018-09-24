@@ -113,14 +113,18 @@ green  = Button(31, 29)
 
 group = DeviceGroup('kitchen')
 group.dimmer = 1.0
-group.load_vm('rainbow.fx', False)
-group.load_vm('chaser.fx', False)
-group.load_vm('emergency.fx', False)
-group.load_vm('lightning.fx', False)
 
 group.stop_vm()
 group.set_all_hsv(0, 0, 0) # off
 
+for fname in ["rainbow.fxb", "chaser.fxb", "emergency.fxb", "lightning.fxb"]:
+    with open(fname) as f: fdata = f.read()
+    group.put_file(fname, fdata)
+
+# group.load_vm('rainbow.fx', False)
+# group.load_vm('chaser.fx', False)
+# group.load_vm('emergency.fx', False)
+# group.load_vm('lightning.fx', False)
 
 eprint("starting loop")
 

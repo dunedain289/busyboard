@@ -11,4 +11,9 @@ RUN pip install -r /requirements.txt
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
+RUN chromatron compile chaser.fx && \
+    chromatron compile emergency.fx && \
+    chromatron compile rainbow.fx && \
+    chromatron compile lightning.fx
+
 CMD ["python", "button-control.py"]
