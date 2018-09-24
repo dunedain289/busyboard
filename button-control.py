@@ -118,6 +118,10 @@ group.load_vm('chaser.fx', False)
 group.load_vm('emergency.fx', False)
 group.load_vm('lightning.fx', False)
 
+group.stop_vm()
+group.set_all_hsv(0, 0, 0) # off
+
+
 eprint("starting loop")
 
 def switch_script(name):
