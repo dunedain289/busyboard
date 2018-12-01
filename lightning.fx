@@ -20,11 +20,6 @@ def loop():
     pixel = Number()
     pixel = rand(0, pixels.count)
 
-    pixels[pixel].hue = hue
-    pixels[pixel].v_fade = 100
-    pixels[pixel].val = 1.0
-    pixels[pixel].sat = sat
-
     tmp = Number()
     tmp = rand(0, 3)
     if tmp == 0:
@@ -37,4 +32,8 @@ def loop():
         hue = 0.166 + rand(0, 0.02)
         sat = 0.4
 
+    pixels[pixel].hue = hue
+    pixels[pixel].v_fade = 100
+    pixels[pixel].val = 1.0
+    pixels[pixel].sat = sat
 
