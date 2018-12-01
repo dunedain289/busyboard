@@ -34,7 +34,7 @@ def loop():
         hue = 0.333 + rand(0, 0.02)
         sat = 1.0
     elif tmp == 2:
-        hue = 0.000 + rand(0, 0.02)
-        sat = 0.0
+        hue = 0.166 + rand(0, 0.02)
+        sat = 0.4
 
 
