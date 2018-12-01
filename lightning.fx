@@ -26,7 +26,7 @@ def loop():
     pixels[pixel].sat = sat
 
     tmp = Number()
-    tmp = rand(3)
+    tmp = rand(0, 3)
     if tmp == 0:
         hue = 0.000 + rand(0, 0.02)
         sat = 1.0
