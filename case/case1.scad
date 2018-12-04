@@ -108,7 +108,8 @@ module bottom() {
 }
 
 module top() {
-    translate([0, 0, BOARD_CLEARANCE+SCREW_TERMINAL_WZ+5])
+    //translate([0, 0, BOARD_CLEARANCE+SCREW_TERMINAL_WZ+5])
+    translate([0, 0, BASE_THICKNESS])
     difference() {
         base();
         lid_screws();
@@ -127,7 +128,7 @@ module plug() {
 
 
 bottom();
-top();
+//top();
 
 //%translate([BOARD_X+5, 8, 0])
 //plug();
