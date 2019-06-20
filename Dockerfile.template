@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-python-build
+FROM balenalib/%%BALENA_MACHINE_NAME%%-python:2-build
 
 # pip install python deps from requirements.txt
 # For caching until requirements.txt changes
