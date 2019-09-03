@@ -138,7 +138,7 @@ def switch_script(name):
 
 def mqtt_connected(client):
     eprint('mqtt connected ok')
-    client.subscribe('dad_loc')
+    client.subscribe('dad-loc')
 def mqtt_disconnected(client):
     eprint('mqtt disconnected')
 def mqtt_message(client, feed_id, payload):
