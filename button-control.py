@@ -2,12 +2,14 @@
 
 from __future__ import print_function
 import sys
+import os
 
 import RPi.GPIO as GPIO
 import time
 
 from chromatron import *
 
+from Adafruit_IO import MQTTClient
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
@@ -134,6 +136,25 @@ def switch_script(name):
     group.set_key('vm_prog', name)
     group.start_vm()
 
+def mqtt_connected(client):
+    eprint('mqtt connected ok')
+    client.subscribe('dad_loc')
+def mqtt_disconnected(client):
+    eprint('mqtt disconnected')
+def mqtt_message(client, feed_id, payload):
+    eprint('mqtt message {}'.format(payload))
+    if payload == 'work exited':
+        switch_script('emergency.fxb')
+
+IO_USERNAME=os.environ['IO_USERNAME']
+IO_API_KEY=os.environ['IO_API_KEY']
+
+mqtt_client = MQTTClient(IO_USERNAME, IO_API_KEY)
+mqtt_client.on_connect = mqtt_connected
+mqtt_client.on_disconnect = mqtt_disconnected
+mqtt_client.on_message = mqtt_message
+mqtt_client.connect()
+
 try:
     blue.light_on()
     time.sleep(0.33)
@@ -168,7 +189,8 @@ try:
             switch_script("lightning.fxb")
             eprint("Green pushed")
 
-        time.sleep(0.05)
+        mqtt_client.loop(0.05)
+
 except KeyboardInterrupt:
     eprint("exiting")
 
