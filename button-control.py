@@ -120,7 +120,7 @@ group.dimmer = 1.0
 group.stop_vm()
 group.set_all_hsv(0, 0, 0) # off
 
-for fname in ["rainbow.fxb", "chaser.fxb", "emergency.fxb", "lightning.fxb"]:
+for fname in ["rainbow.fxb", "chaser.fxb", "emergency.fxb", "lightning.fxb", "mini.fxb"]:
     with open(fname) as f: fdata = f.read()
     group.put_file(fname, fdata)
 
@@ -144,7 +144,7 @@ def mqtt_disconnected(client):
 def mqtt_message(client, feed_id, payload):
     eprint('mqtt message {}'.format(payload))
     if payload == 'work exited':
-        switch_script('emergency.fxb')
+        switch_script('mini.fxb')
 
 IO_USERNAME=os.environ['IO_USERNAME']
 IO_API_KEY=os.environ['IO_API_KEY']

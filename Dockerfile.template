@@ -10,6 +10,7 @@ WORKDIR /usr/src/app
 
 RUN chromatron compile chaser.fx && \
     chromatron compile emergency.fx && \
+    chromatron compile mini.fx && \
     chromatron compile rainbow.fx && \
     chromatron compile lightning.fx
 
