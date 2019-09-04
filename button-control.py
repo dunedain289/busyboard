@@ -154,6 +154,7 @@ mqtt_client.on_connect = mqtt_connected
 mqtt_client.on_disconnect = mqtt_disconnected
 mqtt_client.on_message = mqtt_message
 mqtt_client.connect()
+mqtt_client.loop_background()
 
 try:
     blue.light_on()
@@ -189,8 +190,7 @@ try:
             switch_script("lightning.fxb")
             eprint("Green pushed")
 
-        mqtt_client.connect() # in case we've lost our connection
-        mqtt_client.loop(0.05)
+        time.sleep(0.05)
 
 except KeyboardInterrupt:
     eprint("exiting")
