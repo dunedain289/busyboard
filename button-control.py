@@ -189,6 +189,7 @@ try:
             switch_script("lightning.fxb")
             eprint("Green pushed")
 
+        mqtt_client.connect() # in case we've lost our connection
         mqtt_client.loop(0.05)
 
 except KeyboardInterrupt:
