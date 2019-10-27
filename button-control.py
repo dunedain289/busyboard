@@ -158,6 +158,7 @@ mqtt_client.connect()
 mqtt_client.loop_background()
 
 dimmer_update_rate = datetime.timedelta(minutes=1)
+last_dimmer_update_time = datetime.datetime.now()
 
 try:
     blue.light_on()
