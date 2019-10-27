@@ -6,6 +6,7 @@ import os
 
 import RPi.GPIO as GPIO
 import time
+import datetime
 
 from chromatron import *
 
@@ -156,6 +157,8 @@ mqtt_client.on_message = mqtt_message
 mqtt_client.connect()
 mqtt_client.loop_background()
 
+dimmer_update_rate = datetime.timedelta(minutes=1)
+
 try:
     blue.light_on()
     time.sleep(0.33)
@@ -189,6 +192,13 @@ try:
             # lightning.fxb
             switch_script("lightning.fxb")
             eprint("Green pushed")
+
+        if datetime.datetime.now() - last_dimmer_update_time > dimmer_update_rate
+            last_dimmer_update_time = datetime.datetime.now()
+            if group.dimmer > 0.10 and last_dimmer_update_time.hour >= 21: #9pm or later
+                group.dimmer = 0.10
+            elif group.dimmer < 1.0 and last_dimmer_update_time.hour >= 9: #9am or later
+                group.dimmer = 1.0
 
         time.sleep(0.05)
 
