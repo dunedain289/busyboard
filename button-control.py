@@ -193,7 +193,7 @@ try:
             switch_script("lightning.fxb")
             eprint("Green pushed")
 
-        if datetime.datetime.now() - last_dimmer_update_time > dimmer_update_rate
+        if datetime.datetime.now() - last_dimmer_update_time > dimmer_update_rate:
             last_dimmer_update_time = datetime.datetime.now()
             if group.dimmer > 0.10 and last_dimmer_update_time.hour >= 21: #9pm or later
                 group.dimmer = 0.10
