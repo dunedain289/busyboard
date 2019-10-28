@@ -205,6 +205,8 @@ try:
             elif device.dimmer < 1.0 and last_dimmer_update_time.hour >= 9: #9am or later
                 device.dimmer = 1.0
                 print('should be bright now')
+            else:
+                print('no change - dimmer:{} hour:{}'.format(group.dimmer, last_dimmer_update_time.hour))
 
         time.sleep(0.05)
 
