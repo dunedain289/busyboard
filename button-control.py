@@ -199,14 +199,14 @@ try:
         if datetime.datetime.now() - last_dimmer_update_time > dimmer_update_rate:
             last_dimmer_update_time = datetime.datetime.now()
             print('checking time for dimming')
-            if device.dimmer > 0.10 and last_dimmer_update_time.hour >= 21: #9pm or later
+            if device.dimmer > 0.10 and last_dimmer_update_time.hour >= 2: #9pm or later, in UTC (21 - -5 = 2)
                 device.dimmer = 0.10
                 print('should be dim now')
-            elif device.dimmer < 1.0 and last_dimmer_update_time.hour >= 9: #9am or later
+            elif device.dimmer < 1.0 and last_dimmer_update_time.hour >= 14: #9am or later, in UTC (9 - -5 = 14)
                 device.dimmer = 1.0
                 print('should be bright now')
             else:
-                print('no change - dimmer:{} hour:{}'.format(group.dimmer, last_dimmer_update_time.hour))
+                print('no change - dimmer:{} hour:{}'.format(device.dimmer, last_dimmer_update_time.hour))
 
         time.sleep(0.05)
 
