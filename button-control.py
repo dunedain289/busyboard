@@ -8,7 +8,7 @@ import RPi.GPIO as GPIO
 import time
 import datetime
 
-from chromatron import *
+from chromatron import DeviceGroup
 
 from Adafruit_IO import MQTTClient
 
@@ -116,26 +116,28 @@ green  = Button(31, 29)
 # GPIO.setup(16, GPIO.OUT)
 
 group = DeviceGroup('kitchen')
-group.dimmer = 1.0
+_name, device = group.items()[0]
 
-group.stop_vm()
-group.set_all_hsv(0, 0, 0) # off
+device.dimmer = 1.0
+
+device.stop_vm()
+device.set_all_hsv(0, 0, 0) # off
 
 for fname in ["rainbow.fxb", "chaser.fxb", "emergency.fxb", "lightning.fxb", "mini.fxb"]:
     with open(fname) as f: fdata = f.read()
-    group.put_file(fname, fdata)
+    device.put_file(fname, fdata)
 
-# group.load_vm('rainbow.fx', False)
-# group.load_vm('chaser.fx', False)
-# group.load_vm('emergency.fx', False)
-# group.load_vm('lightning.fx', False)
+# device.load_vm('rainbow.fx', False)
+# device.load_vm('chaser.fx', False)
+# device.load_vm('emergency.fx', False)
+# device.load_vm('lightning.fx', False)
 
 eprint("starting loop")
 
 def switch_script(name):
-    group.stop_vm()
-    group.set_key('vm_prog', name)
-    group.start_vm()
+    device.stop_vm()
+    device.set_key('vm_prog', name)
+    device.start_vm()
 
 def mqtt_connected(client):
     eprint('mqtt connected ok')
@@ -197,11 +199,11 @@ try:
         if datetime.datetime.now() - last_dimmer_update_time > dimmer_update_rate:
             last_dimmer_update_time = datetime.datetime.now()
             print('checking time for dimming')
-            if group.dimmer > 0.10 and last_dimmer_update_time.hour >= 21: #9pm or later
-                group.dimmer = 0.10
+            if device.dimmer > 0.10 and last_dimmer_update_time.hour >= 21: #9pm or later
+                device.dimmer = 0.10
                 print('should be dim now')
-            elif group.dimmer < 1.0 and last_dimmer_update_time.hour >= 9: #9am or later
-                group.dimmer = 1.0
+            elif device.dimmer < 1.0 and last_dimmer_update_time.hour >= 9: #9am or later
+                device.dimmer = 1.0
                 print('should be bright now')
 
         time.sleep(0.05)
